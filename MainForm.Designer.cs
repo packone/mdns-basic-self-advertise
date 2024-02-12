@@ -1,6 +1,6 @@
 ﻿namespace mdns_basic_self_advertise;
 
-partial class Form1
+partial class MainForm
 {
     /// <summary>
     ///  Required designer variable.
@@ -47,7 +47,7 @@ partial class Form1
         // TextBoxDomain
         // 
         TextBoxDomain.Dock = DockStyle.Fill;
-        TextBoxDomain.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+        TextBoxDomain.Font = new Font("Segoe UI", 16F);
         TextBoxDomain.Location = new Point(307, 3);
         TextBoxDomain.Name = "TextBoxDomain";
         TextBoxDomain.Size = new Size(574, 64);
@@ -59,7 +59,7 @@ partial class Form1
         CheckBoxSwitch.Appearance = Appearance.Button;
         CheckBoxSwitch.AutoSize = true;
         CheckBoxSwitch.Dock = DockStyle.Fill;
-        CheckBoxSwitch.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+        CheckBoxSwitch.Font = new Font("Segoe UI", 16F);
         CheckBoxSwitch.Location = new Point(887, 3);
         CheckBoxSwitch.Name = "CheckBoxSwitch";
         CheckBoxSwitch.Size = new Size(157, 69);
@@ -83,7 +83,7 @@ partial class Form1
         // 
         LabelDomainName.AutoSize = true;
         LabelDomainName.Dock = DockStyle.Fill;
-        LabelDomainName.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+        LabelDomainName.Font = new Font("Segoe UI", 16F);
         LabelDomainName.Location = new Point(3, 0);
         LabelDomainName.Name = "LabelDomainName";
         LabelDomainName.Size = new Size(298, 75);
@@ -147,9 +147,9 @@ partial class Form1
         CheckBoxLogAll.Dock = DockStyle.Fill;
         CheckBoxLogAll.Location = new Point(72, 3);
         CheckBoxLogAll.Name = "CheckBoxLogAll";
-        CheckBoxLogAll.Size = new Size(97, 42);
+        CheckBoxLogAll.Size = new Size(308, 42);
         CheckBoxLogAll.TabIndex = 3;
-        CheckBoxLogAll.Text = "Log All";
+        CheckBoxLogAll.Text = "Log every mDNS Question";
         CheckBoxLogAll.UseVisualStyleBackColor = true;
         // 
         // CheckBoxKeepLog
@@ -157,25 +157,25 @@ partial class Form1
         CheckBoxKeepLog.Appearance = Appearance.Button;
         CheckBoxKeepLog.AutoSize = true;
         CheckBoxKeepLog.Dock = DockStyle.Fill;
-        CheckBoxKeepLog.Location = new Point(175, 3);
+        CheckBoxKeepLog.Location = new Point(386, 3);
         CheckBoxKeepLog.Name = "CheckBoxKeepLog";
-        CheckBoxKeepLog.Size = new Size(282, 42);
+        CheckBoxKeepLog.Size = new Size(258, 42);
         CheckBoxKeepLog.TabIndex = 6;
-        CheckBoxKeepLog.Text = "Log nicht überschreiben";
+        CheckBoxKeepLog.Text = "Log overwrite inactive";
         CheckBoxKeepLog.UseVisualStyleBackColor = true;
         // 
         // ButtonClearLog
         // 
         ButtonClearLog.Dock = DockStyle.Fill;
-        ButtonClearLog.Location = new Point(463, 3);
+        ButtonClearLog.Location = new Point(650, 3);
         ButtonClearLog.Name = "ButtonClearLog";
         ButtonClearLog.Size = new Size(150, 42);
         ButtonClearLog.TabIndex = 7;
-        ButtonClearLog.Text = "Log leeren";
+        ButtonClearLog.Text = "Log clear";
         ButtonClearLog.UseVisualStyleBackColor = true;
         ButtonClearLog.Click += ButtonClearLog_Click_1;
         // 
-        // Form1
+        // MainForm
         // 
         AutoScaleDimensions = new SizeF(13F, 32F);
         AutoScaleMode = AutoScaleMode.Font;
@@ -183,7 +183,7 @@ partial class Form1
         Controls.Add(groupBox1);
         Controls.Add(flowLayoutPanel1);
         Controls.Add(RichTextBoxLog);
-        Name = "Form1";
+        Name = "MainForm";
         Text = "mdns-basic-self-advertise";
         FormClosing += Form1_FormClosing;
         flowLayoutPanel1.ResumeLayout(false);

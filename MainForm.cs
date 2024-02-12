@@ -1,8 +1,10 @@
 using Makaretu.Dns;
+using Microsoft.VisualBasic;
+using System.Globalization;
 
 namespace mdns_basic_self_advertise;
 
-public partial class Form1 : Form
+public partial class MainForm : Form
 {
     private readonly MulticastService mdns = new MulticastService();
     /// <summary>
@@ -10,10 +12,18 @@ public partial class Form1 : Form
     /// </summary>
     string? DomainNameApp;
 
-    public Form1()
+    public MainForm()
     {
+        // test languages
+        //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
         InitializeComponent();
         CheckBoxSwitchState();
+
+        //load Translations
+        CheckBoxLogAll.Text = Resources.LogAll;
+        CheckBoxKeepLog.Text = Resources.KeepLog;
+        ButtonClearLog.Text = Resources.ClearLog;
+
     }
 
     /// <summary>
@@ -25,7 +35,7 @@ public partial class Form1 : Form
     private void QueryReceivedEvent(object? sender, MessageEventArgs e)
     {
         if (string.IsNullOrEmpty(DomainNameApp))
-            throw new Exception("DomainNameApp not set");
+            throw new Exception($"{nameof(DomainNameApp)}{Resources.exceptionPropNotSet}");
 
         var message = e.Message;
 
@@ -55,20 +65,20 @@ public partial class Form1 : Form
         {
             this.CheckBoxSwitch.Checked = false;
             CheckBoxSwitchState();
-            LogMessage($"{LabelDomainName.Text} darf nicht leer sein.");
+            LogMessage($"{LabelDomainName.Text}{Resources.inputNotEmpty}");
             return;
         }
 
         DomainNameApp = domainText;
         mdns.QueryReceived += QueryReceivedEvent;
         mdns.Start();
-        LogMessage("gestartet");
+        LogMessage(Resources.started);
     }
 
     private void ClickMDNSStop()
     {
         mdns.Stop();
-        LogMessage("gestoppt");
+        LogMessage(Resources.stopped);
     }
 
     private void CheckBoxSwitch_CheckedChanged(object sender, EventArgs e)
@@ -83,7 +93,7 @@ public partial class Form1 : Form
 
     private void CheckBoxSwitchState()
     {
-        this.CheckBoxSwitch.Text = this.CheckBoxSwitch.Checked ? "mDNS stoppen" : "mDNS starten";
+        this.CheckBoxSwitch.Text = this.CheckBoxSwitch.Checked ? Resources.checkBoxSwitchMDNSStop : Resources.checkBoxSwitchMDNSStart;
     }
 
     private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -95,20 +105,20 @@ public partial class Form1 : Form
     void LogMessage(Makaretu.Dns.Message MDNSMessage)
     {
         this.LogMessage(
-            string.Join(" ", new[] {
-                "mDNS Message",
+            string.Join(Resources.spaceChar, new[] {
+                Resources.mDNSMessage,
                 MDNSMessage.CreationTime.ToString(),
-                "Questions",
+                nameof(MDNSMessage.Questions),
                 MDNSMessage.Questions.Count.ToString(),
-                string.Join(" ", MDNSMessage.Questions.ConvertAll(c => string.Join(" ", new[]{
+                string.Join(Resources.spaceChar, MDNSMessage.Questions.ConvertAll(c => string.Join(Resources.spaceChar, new[]{
                     c.Class.ToString(),
                     c.Type.ToString(),
                     c.CreationTime.ToString(),
                     c.Name.ToString()
                 }))),
-                "Answers",
+                nameof(MDNSMessage.Answers),
                 MDNSMessage.Answers.Count.ToString(),
-                string.Join(" ", MDNSMessage.Answers.ConvertAll(c => string.Join(" ", new[]{
+                string.Join(Resources.spaceChar, MDNSMessage.Answers.ConvertAll(c => string.Join(Resources.spaceChar, new[]{
                     c.Class.ToString(),
                     c.Type.ToString(),
                     c.CreationTime.ToString(),
@@ -126,8 +136,8 @@ public partial class Form1 : Form
         }
 
         this.RichTextBoxLog.AppendText(
-            string.Join(" ", new[] {
-                DateTime.Now.ToString("hh:mm:ss.fff"),
+            string.Join(Resources.spaceChar, new[] {
+                DateTime.Now.ToString(Resources.dateTimeStringFormat),
                 Message,
                 Environment.NewLine
             }));
