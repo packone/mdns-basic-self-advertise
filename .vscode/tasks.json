@@ -1,0 +1,36 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "build",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "build",
+          "${workspaceFolder}/mdns-basic-self-advertise.csproj",
+        ],
+        "problemMatcher": "$msCompile"
+      },
+      {
+        "label": "publish",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "publish",
+          "${workspaceFolder}/mdns-basic-self-advertise.csproj",
+          "/property:GenerateFullPaths=true",
+          "/consoleloggerparameters:NoSummary",
+          "/property:configuration=Release",
+          "/property:PublishSingleFile=true",
+          "--self-contained=false",
+          "/property:PublishTrimmed=false",
+          "/property:Runtimeidentifier=win-x64",
+          "/property:IncludeNativeLibrariesForSelfExtract=true",
+          "/property:DebugType=None",
+          "/property:DebugSymbols=false"
+        ],
+        "problemMatcher": "$msCompile"
+      },
+    ]
+  }
+  
