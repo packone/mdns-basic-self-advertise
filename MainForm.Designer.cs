@@ -30,7 +30,6 @@ partial class MainForm
     {
         TextBoxDomain = new TextBox();
         CheckBoxSwitch = new CheckBox();
-        RichTextBoxLog = new RichTextBox();
         LabelDomainName = new Label();
         flowLayoutPanel1 = new FlowLayoutPanel();
         groupBox1 = new GroupBox();
@@ -39,9 +38,11 @@ partial class MainForm
         CheckBoxLogAll = new CheckBox();
         CheckBoxKeepLog = new CheckBox();
         ButtonClearLog = new Button();
+        dataGridViewMessageLog = new DataGridView();
         flowLayoutPanel1.SuspendLayout();
         groupBox1.SuspendLayout();
         flowLayoutPanel2.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)dataGridViewMessageLog).BeginInit();
         SuspendLayout();
         // 
         // TextBoxDomain
@@ -68,16 +69,6 @@ partial class MainForm
         CheckBoxSwitch.TextAlign = ContentAlignment.MiddleCenter;
         CheckBoxSwitch.UseVisualStyleBackColor = true;
         CheckBoxSwitch.CheckedChanged += CheckBoxSwitch_CheckedChanged;
-        // 
-        // RichTextBoxLog
-        // 
-        RichTextBoxLog.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-        RichTextBoxLog.Location = new Point(24, 196);
-        RichTextBoxLog.Name = "RichTextBoxLog";
-        RichTextBoxLog.ReadOnly = true;
-        RichTextBoxLog.Size = new Size(1728, 705);
-        RichTextBoxLog.TabIndex = 4;
-        RichTextBoxLog.Text = "";
         // 
         // LabelDomainName
         // 
@@ -175,14 +166,24 @@ partial class MainForm
         ButtonClearLog.UseVisualStyleBackColor = true;
         ButtonClearLog.Click += ButtonClearLog_Click_1;
         // 
+        // dataGridViewMessageLog
+        // 
+        dataGridViewMessageLog.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        dataGridViewMessageLog.Dock = DockStyle.Fill;
+        dataGridViewMessageLog.Location = new Point(0, 161);
+        dataGridViewMessageLog.Name = "dataGridViewMessageLog";
+        dataGridViewMessageLog.RowHeadersWidth = 82;
+        dataGridViewMessageLog.Size = new Size(1774, 768);
+        dataGridViewMessageLog.TabIndex = 11;
+        // 
         // MainForm
         // 
         AutoScaleDimensions = new SizeF(13F, 32F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(1774, 929);
+        Controls.Add(dataGridViewMessageLog);
         Controls.Add(groupBox1);
         Controls.Add(flowLayoutPanel1);
-        Controls.Add(RichTextBoxLog);
         Name = "MainForm";
         Text = "mdns-basic-self-advertise";
         FormClosing += Form1_FormClosing;
@@ -192,6 +193,7 @@ partial class MainForm
         groupBox1.PerformLayout();
         flowLayoutPanel2.ResumeLayout(false);
         flowLayoutPanel2.PerformLayout();
+        ((System.ComponentModel.ISupportInitialize)dataGridViewMessageLog).EndInit();
         ResumeLayout(false);
         PerformLayout();
     }
@@ -200,7 +202,6 @@ partial class MainForm
 
     private TextBox TextBoxDomain;
     private CheckBox CheckBoxSwitch;
-    private RichTextBox RichTextBoxLog;
     private Label LabelDomainName;
     private FlowLayoutPanel flowLayoutPanel1;
     private GroupBox groupBox1;
@@ -209,4 +210,5 @@ partial class MainForm
     private CheckBox CheckBoxLogAll;
     private CheckBox CheckBoxKeepLog;
     private Button ButtonClearLog;
+    private DataGridView dataGridViewMessageLog;
 }

@@ -1,6 +1,6 @@
 using Makaretu.Dns;
-using Microsoft.VisualBasic;
-using System.Globalization;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace mdns_basic_self_advertise;
 
@@ -11,6 +11,7 @@ public partial class MainForm : Form
     /// z.B. test123.local
     /// </summary>
     string? DomainNameApp;
+    BindingList<DGLogMessage> dGLogMessages = new BindingList<DGLogMessage>();
 
     public MainForm()
     {
@@ -23,7 +24,8 @@ public partial class MainForm : Form
         CheckBoxLogAll.Text = Resources.LogAll;
         CheckBoxKeepLog.Text = Resources.KeepLog;
         ButtonClearLog.Text = Resources.ClearLog;
-
+        dataGridViewMessageLog.DataSource = dGLogMessages;
+        dataGridViewMessageLog.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
     }
 
     /// <summary>
@@ -135,23 +137,35 @@ public partial class MainForm : Form
             return;
         }
 
-        this.RichTextBoxLog.AppendText(
-            string.Join(Resources.spaceChar, new[] {
-                DateTime.Now.ToString(Resources.dateTimeStringFormat),
-                Message,
-                Environment.NewLine
-            }));
-        this.RichTextBoxLog.ScrollToCaret();
+        this.dGLogMessages.Add(new DGLogMessage(
+            DateTime.Now.ToString(Resources.dateTimeStringFormat),
+            Message));
+        this.dataGridViewMessageLog.FirstDisplayedScrollingRowIndex = this.dataGridViewMessageLog.RowCount - 1;
 
         // TODO UI controlable
         const int LinesKeept = 500;
-        int currentLineCount = this.RichTextBoxLog.Lines.Length;
+        int currentLineCount = this.dataGridViewMessageLog.RowCount;
         if (currentLineCount > LinesKeept && !this.CheckBoxKeepLog.Checked)
-            this.RichTextBoxLog.Lines = this.RichTextBoxLog.Lines.Skip(currentLineCount - LinesKeept).ToArray();
+            while (this.dataGridViewMessageLog.RowCount > LinesKeept)
+                this.dataGridViewMessageLog.Rows.RemoveAt(this.dataGridViewMessageLog.Rows[0].Index);
     }
 
     private void ButtonClearLog_Click_1(object sender, EventArgs e)
     {
-        this.RichTextBoxLog.Clear();
+        this.dataGridViewMessageLog.Rows.Clear();
+    }
+
+    public class DGLogMessage
+    {
+        [Display(ResourceType = typeof(Resources), Name = nameof(Resources.DataGridLogDate))]
+        public string Date { get; set; }
+        [Display(ResourceType = typeof(Resources), Name = nameof(Resources.DataGridLogMessage))]
+        public string Message { get; set; }
+
+        public DGLogMessage(string date, string message)
+        {
+            this.Date = date;
+            this.Message = message;
+        }
     }
 }

@@ -126,6 +126,12 @@
   <data name="ClearLog" xml:space="preserve">
     <value>Log clear</value>
   </data>
+  <data name="DataGridLogDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="DataGridLogMessage" xml:space="preserve">
+    <value>Message</value>
+  </data>
   <data name="dateTimeStringFormat" xml:space="preserve">
     <value>hh:mm:ss.fff</value>
   </data>

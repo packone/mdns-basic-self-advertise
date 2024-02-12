@@ -88,6 +88,24 @@ namespace mdns_basic_self_advertise {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Date ähnelt.
+        /// </summary>
+        public static string DataGridLogDate {
+            get {
+                return ResourceManager.GetString("DataGridLogDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Message ähnelt.
+        /// </summary>
+        public static string DataGridLogMessage {
+            get {
+                return ResourceManager.GetString("DataGridLogMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die hh:mm:ss.fff ähnelt.
         /// </summary>
         public static string dateTimeStringFormat {
